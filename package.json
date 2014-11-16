@@ -1,0 +1,32 @@
+{
+  "name": "jii-request-httpserver",
+  "version": "0.2.0",
+  "description": "Jii HttpServer",
+  "main": "index.js",
+  "author": "Vladimir Kozhin <affka@affka.ru>",
+  "scripts": {
+    "test": "nodeunit tests/unit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jiisoft/jii-request-httpserver"
+  },
+  "keywords": [
+    "yii",
+    "php",
+    "framework",
+    "javascript"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/jiisoft/jii-request-httpserver",
+  "bugs": {
+    "url": "https://github.com/jiisoft/jii-request-httpserver/issues"
+  },
+  "devDependencies": {
+    "jii": "^0.2.1",
+    "jii-request": "^0.2.0",
+    "require-all": "0.0.8",
+    "nodeunit": "^0.9.0",
+    "request": "^2.48.0"
+  }
+}
