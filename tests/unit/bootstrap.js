@@ -1,7 +1,12 @@
 'use strict';
 
-// Load libs
-global.Jii = require('../../index');
+/**
+ * @namespace Jii
+ * @ignore
+ */
+var Jii = require('../../index');
+
+require('jii-urlmanager');
 
 Jii.createWebApplication({
 	application: {

@@ -1,10 +1,15 @@
 'use strict';
 
+/**
+ * @namespace Jii
+ * @ignore
+ */
+var Jii = require('../../index');
 require('./bootstrap');
 
 var request = require('request');
 
-global.app = Jii.namespace('app');
+var app = Jii.namespace('app');
 
 /**
  * @class tests.unit.HttpServerTest
@@ -21,14 +26,14 @@ var self = Jii.defineClass('tests.unit.HttpServerTest', {
 	init: function() {
 		Jii.app.setComponents({
 			urlManager: {
-				className: 'Jii.request.UrlManager',
+				className: 'Jii.urlManager.UrlManager',
 				rules: {
 					'': 'site/index',
 					'test/<page>': 'site/test'
 				}
 			},
 			httpServer: {
-				className: 'Jii.request.httpServer.HttpServer',
+				className: 'Jii.httpServer.HttpServer',
 				port: this.__static.SERVER_PORT
 			}
 		});
@@ -75,7 +80,7 @@ var self = Jii.defineClass('tests.unit.HttpServerTest', {
 			test.strictEqual(request.get('param1'), testValue.toString());
 			test.strictEqual(request.get('page'), '50');
 
-			response.format = Jii.request.httpServer.Response.FORMAT_JSON;
+			response.format = Jii.httpServer.Response.FORMAT_JSON;
 			response.data = {jp: 15};
 			response.send();
 		};
@@ -98,7 +103,7 @@ var self = Jii.defineClass('tests.unit.HttpServerTest', {
 
 Jii.defineClass('app.controllers.SiteController', {
 
-	__extends: Jii.request.BaseController,
+	__extends: Jii.base.Controller,
 
 	actionIndex: function(context) {
 		var request = context.getComponent('request');
