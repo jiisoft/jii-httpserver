@@ -1,7 +1,7 @@
 {
-  "name": "jii-request-httpserver",
-  "version": "0.2.0",
-  "description": "Jii HttpServer",
+  "name": "jii-httpserver",
+  "version": "0.3.0",
+  "description": "Jii http server",
   "main": "index.js",
   "author": "Vladimir Kozhin <affka@affka.ru>",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jiisoft/jii-request-httpserver"
+    "url": "https://github.com/jiisoft/jii-httpserver"
   },
   "keywords": [
     "yii",
@@ -18,18 +18,16 @@
     "javascript"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/jiisoft/jii-request-httpserver",
+  "homepage": "https://github.com/jiisoft/jii-httpserver",
   "bugs": {
-    "url": "https://github.com/jiisoft/jii-request-httpserver/issues"
+    "url": "https://github.com/jiisoft/jii-httpserver/issues"
   },
   "dependencies": {
-    "express": "^4.10.2"
+    "express": "^4.10.2",
+    "require-all": "0.0.8",
+    "request": "^2.48.0"
   },
   "devDependencies": {
-    "jii": "^0.2.1",
-    "jii-request": "^0.2.0",
-    "require-all": "0.0.8",
-    "nodeunit": "^0.9.0",
-    "request": "^2.48.0"
+    "nodeunit": "^0.9.0"
   }
 }
