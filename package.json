@@ -1,6 +1,6 @@
 {
   "name": "jii-httpserver",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Jii http server",
   "main": "index.js",
   "author": "Vladimir Kozhin <affka@affka.ru>",
@@ -31,9 +31,5 @@
   },
   "devDependencies": {
     "nodeunit": "^0.9.0"
-  },
-  "peerDependencies": {
-    "jii": "*",
-    "jii-urlmanager": "*"
   }
 }
