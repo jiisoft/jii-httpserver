@@ -17,7 +17,7 @@ var app = Jii.namespace('app');
  */
 var self = Jii.defineClass('tests.unit.HttpServerTest', {
 
-	__extends: Jii.base.UnitTest,
+	__extends: 'Jii.base.UnitTest',
 
 	__static: {
 		SERVER_PORT: 3300
@@ -103,7 +103,7 @@ var self = Jii.defineClass('tests.unit.HttpServerTest', {
 
 Jii.defineClass('app.controllers.SiteController', {
 
-	__extends: Jii.base.Controller,
+	__extends: 'Jii.base.Controller',
 
 	actionIndex: function(context) {
 		var request = context.getComponent('request');

@@ -1,4 +1,5 @@
-
 module.exports = require('jii');
-require('jii-urlmanager');
-require('require-all')(__dirname + '/lib');
+
+require('./lib/server/HttpServer.js');
+require('./lib/server/Request.js');
+require('./lib/server/Response.js');

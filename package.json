@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "express": "^4.10.2",
-    "require-all": "0.0.8",
     "request": "^2.48.0",
     "body-parser": "^1.11.0",
     "multer": "^0.1.7"
