@@ -1,6 +1,6 @@
 {
   "name": "jii-httpserver",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "description": "Jii http server",
   "main": "index.js",
   "author": "Vladimir Kozhin <affka@affka.ru>",
