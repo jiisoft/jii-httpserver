@@ -3,19 +3,21 @@
  * @license MIT
  */
 
-/**
- * @namespace Jii
- * @ignore
- */
 var Jii = require('jii');
+var _indexOf = require('lodash/indexOf');
+var _isObject = require('lodash/isObject');
+var _isString = require('lodash/isString');
+var _each = require('lodash/each');
+var _has = require('lodash/has');
+var Response = require('jii/base/Response');
 
 /**
  * @class Jii.httpServer.Response
  * @extends Jii.base.Response
  */
-Jii.defineClass('Jii.httpServer.Response', /** @lends Jii.httpServer.Response.prototype */{
+module.exports = Jii.defineClass('Jii.httpServer.Response', /** @lends Jii.httpServer.Response.prototype */{
 
-	__extends: 'Jii.base.Response',
+	__extends: Response,
 
 	__static: /** @lends Jii.httpServer.Response */{
 
@@ -270,7 +272,7 @@ Jii.defineClass('Jii.httpServer.Response', /** @lends Jii.httpServer.Response.pr
         }
 
         // @todo Also need set age, path, ..
-        Jii._.each(this._cookies, (value, key) => {
+        _each(this._cookies, (value, key) => {
             //this._nativeResponse.cookie(key, value);
         });
     },
@@ -408,7 +410,7 @@ Jii.defineClass('Jii.httpServer.Response', /** @lends Jii.httpServer.Response.pr
      * @return {boolean} whether this response is empty
      */
     isEmpty() {
-        return Jii._.indexOf([201, 204, 304], this.getStatusCode()) !== -1;
+        return _indexOf([201, 204, 304], this.getStatusCode()) !== -1;
     },
 
     /**
@@ -421,7 +423,7 @@ Jii.defineClass('Jii.httpServer.Response', /** @lends Jii.httpServer.Response.pr
             return;
         }
 
-        if (Jii._.has(this.formatters, this.format)) {
+        if (_has(this.formatters, this.format)) {
             var formatter = this.formatters[this.format];
 
             // Lazy create instance
@@ -445,7 +447,7 @@ Jii.defineClass('Jii.httpServer.Response', /** @lends Jii.httpServer.Response.pr
 
                 case this.__static.FORMAT_JSONP:
                     this.getHeaders().set('Content-Type', 'text/javascript; charset=' + this.charset);
-                    if (Jii._.isObject(this.data) && Jii._.has(this.data, 'data') && Jii._.has(this.data, 'callback')) {
+                    if (_isObject(this.data) && _has(this.data, 'data') && _has(this.data, 'callback')) {
                         this.content = this.data.callback + '(' + JSON.stringify(this.data.data) + ');';
                     } else {
                         this.content = '';
@@ -463,11 +465,11 @@ Jii.defineClass('Jii.httpServer.Response', /** @lends Jii.httpServer.Response.pr
             }
         }
 
-        if (!Jii._.isString(this.content)) {
+        if (!_isString(this.content)) {
             throw new Jii.exceptions.InvalidParamException("Response content must be a string.");
         }
 
-        if (Jii._.isObject(this.content)) {
+        if (_isObject(this.content)) {
             this.content = this.content.toString();
         }
     }

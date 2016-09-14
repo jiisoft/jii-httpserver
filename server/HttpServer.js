@@ -5,12 +5,11 @@
 
 'use strict';
 
-/**
- * @namespace Jii
- * @ignore
- */
 var Jii = require('jii');
-
+var _isString = require('lodash/isString');
+var _each = require('lodash/each');
+var _extend = require('lodash/extend');
+var Component = require('jii/base/Component');
 var http = require('http');
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -20,9 +19,9 @@ var multer = require('multer');
  * @class Jii.httpServer.HttpServer
  * @extends Jii.base.Component
  */
-Jii.defineClass('Jii.httpServer.HttpServer', /** @lends Jii.httpServer.HttpServer.prototype */{
+module.exports = Jii.defineClass('Jii.httpServer.HttpServer', /** @lends Jii.httpServer.HttpServer.prototype */{
 	
-	__extends: 'Jii.base.Component',
+	__extends: Component,
 
     host: '0.0.0.0',
     port: 3000,
@@ -48,14 +47,14 @@ Jii.defineClass('Jii.httpServer.HttpServer', /** @lends Jii.httpServer.HttpServe
         this._express.use(multer()); // for parsing multipart/form-data
 
         // Static files
-        if (Jii._.isString(this.staticDirs)) {
+        if (_isString(this.staticDirs)) {
             this.staticDirs = [this.staticDirs];
         }
-        Jii._.each(this.staticDirs || [], dir => {
+        _each(this.staticDirs || [], dir => {
             this._express.use(express.static(dir));
         });
 
-        if (Jii._.isString(this.urlManager)) {
+        if (_isString(this.urlManager)) {
             this.urlManager = Jii.app.getComponent(this.urlManager);
         }
     },
@@ -96,7 +95,7 @@ Jii.defineClass('Jii.httpServer.HttpServer', /** @lends Jii.httpServer.HttpServe
 
             // Append parsed params to request
             var queryParams = request.getQueryParams();
-            request.setQueryParams(Jii._.extend(queryParams, params));
+            request.setQueryParams(_extend(queryParams, params));
 
 			// Create response component
 			var response = new Jii.httpServer.Response(expressResponse);

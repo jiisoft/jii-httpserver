@@ -5,19 +5,20 @@
 
 'use strict';
 
-/**
- * @namespace Jii
- * @ignore
- */
 var Jii = require('jii');
+var _trimStart = require('lodash/trimStart');
+var _isEmpty = require('lodash/isEmpty');
+var _each = require('lodash/each');
+var _values = require('lodash/values');
+var HttpRequest = require('jii/base/HttpRequest');
 
 /**
  * @class Jii.httpServer.Request
  * @extends Jii.base.HttpRequest
  */
-Jii.defineClass('Jii.httpServer.Request', /** @lends Jii.httpServer.Request.prototype */{
+module.exports = Jii.defineClass('Jii.httpServer.Request', /** @lends Jii.httpServer.Request.prototype */{
 
-	__extends: 'Jii.base.HttpRequest',
+	__extends: HttpRequest,
 
     _httpMessage: null,
 
@@ -149,7 +150,7 @@ Jii.defineClass('Jii.httpServer.Request', /** @lends Jii.httpServer.Request.prot
      * @param {string} value The request URI to be set
      */
     setUrl(value) {
-        this._url = Jii._s.ltrim(value, '/');
+        this._url = _trimStart(value, '/');
     },
 
     /**
@@ -277,13 +278,13 @@ Jii.defineClass('Jii.httpServer.Request', /** @lends Jii.httpServer.Request.prot
         var acceptedLanguages = this.getAcceptableLanguages();
         var finedLanguage = null;
 
-        if (Jii._.isEmpty(languages)) {
+        if (_isEmpty(languages)) {
             return acceptedLanguages.length > 0 ? acceptedLanguages[0] : null;
         }
 
-        Jii._.each(acceptedLanguages, acceptedLanguage => {
+        _each(acceptedLanguages, acceptedLanguage => {
             acceptedLanguage = acceptedLanguage.replace('_', '-').toLowerCase();
-            Jii._.each(languages, language => {
+            _each(languages, language => {
                 language = language.replace('_', '-').toLowerCase();
 
                 // en-us==en-us, en==en-us, en-us==en
@@ -294,7 +295,7 @@ Jii.defineClass('Jii.httpServer.Request', /** @lends Jii.httpServer.Request.prot
             });
         });
 
-        return finedLanguage || Jii._.values(languages)[0];
+        return finedLanguage || _values(languages)[0];
     },
 
     getCookies() {
@@ -330,7 +331,7 @@ Jii.defineClass('Jii.httpServer.Request', /** @lends Jii.httpServer.Request.prot
     },
 
     _parsePathInfo() {
-        return Jii._s.ltrim(this._httpMessage._parsedUrl.pathname, '/');
+        return _trimStart(this._httpMessage._parsedUrl.pathname, '/');
     }
 
 });
