@@ -6,6 +6,9 @@
 'use strict';
 
 var Jii = require('jii');
+var Request = require('./Request');
+var Response = require('./Response');
+var InvalidRouteException = require('jii/exceptions/InvalidRouteException');
 var _isString = require('lodash/isString');
 var _each = require('lodash/each');
 var _extend = require('lodash/extend');
@@ -87,7 +90,7 @@ module.exports = Jii.defineClass('Jii.httpServer.HttpServer', /** @lends Jii.htt
      * @private
      */
     _onRoute(expressRequest, expressResponse) {
-        var request = new Jii.httpServer.Request(expressRequest);
+        var request = new Request(expressRequest);
         var result = this.urlManager.parseRequest(request);
         if (result !== false) {
             var route = result[0];
@@ -98,7 +101,7 @@ module.exports = Jii.defineClass('Jii.httpServer.HttpServer', /** @lends Jii.htt
             request.setQueryParams(_extend(queryParams, params));
 
 			// Create response component
-			var response = new Jii.httpServer.Response(expressResponse);
+			var response = new Response(expressResponse);
 
 			// Create context
 			var context = Jii.createContext();
@@ -109,7 +112,7 @@ module.exports = Jii.defineClass('Jii.httpServer.HttpServer', /** @lends Jii.htt
             return;
         }
 
-        //throw new Jii.exceptions.InvalidRouteException(Jii.t('jii', 'Page not found.'));
+        //throw new InvalidRouteException(Jii.t('jii', 'Page not found.'));
         Jii.info('Page not found.');
     }
 });

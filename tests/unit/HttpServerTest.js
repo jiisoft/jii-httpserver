@@ -5,6 +5,7 @@
  * @ignore
  */
 var Jii = require('../../index');
+var Response = require('../../server/Response');
 require('./bootstrap');
 
 var request = require('request');
@@ -80,7 +81,7 @@ var self = Jii.defineClass('tests.unit.HttpServerTest', {
 			test.strictEqual(request.get('param1'), testValue.toString());
 			test.strictEqual(request.get('page'), '50');
 
-			response.format = Jii.httpServer.Response.FORMAT_JSON;
+			response.format = Response.FORMAT_JSON;
 			response.data = {jp: 15};
 			response.send();
 		};

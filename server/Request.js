@@ -6,6 +6,7 @@
 'use strict';
 
 var Jii = require('jii');
+var InvalidConfigException = require('jii/exceptions/InvalidConfigException');
 var _trimStart = require('lodash/trimStart');
 var _isEmpty = require('lodash/isEmpty');
 var _each = require('lodash/each');
@@ -24,10 +25,10 @@ module.exports = Jii.defineClass('Jii.httpServer.Request', /** @lends Jii.httpSe
 
     constructor(httpMessage) {
         if (!httpMessage.method) {
-            throw new Jii.exceptions.InvalidConfigException('Not found param `method` in http message.');
+            throw new InvalidConfigException('Not found param `method` in http message.');
         }
         if (!httpMessage.headers) {
-            throw new Jii.exceptions.InvalidConfigException('Not found `headers` in http message.');
+            throw new InvalidConfigException('Not found `headers` in http message.');
         }
 
         this._httpMessage = httpMessage;

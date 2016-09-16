@@ -4,6 +4,10 @@
  */
 
 var Jii = require('jii');
+var Url = require('jii/helpers/Url');
+var InvalidParamException = require('jii/exceptions/InvalidParamException');
+var HeaderCollection = require('jii/request/HeaderCollection');
+var InvalidConfigException = require('jii/exceptions/InvalidConfigException');
 var _indexOf = require('lodash/indexOf');
 var _isObject = require('lodash/isObject');
 var _isString = require('lodash/isString');
@@ -206,7 +210,7 @@ module.exports = Jii.defineClass('Jii.httpServer.Response', /** @lends Jii.httpS
 
         this._statusCode = parseInt(value);
         if (this.isInvalid()) {
-            throw new Jii.exceptions.InvalidParamException();
+            throw new InvalidParamException();
         }
 
         this.statusText = text || this.__static.httpStatuses[this._statusCode] || '';
@@ -219,7 +223,7 @@ module.exports = Jii.defineClass('Jii.httpServer.Response', /** @lends Jii.httpS
      */
     getHeaders() {
         if (this._headers === null) {
-            this._headers = new Jii.request.HeaderCollection();
+            this._headers = new HeaderCollection();
         }
         return this._headers;
     },
@@ -324,7 +328,7 @@ module.exports = Jii.defineClass('Jii.httpServer.Response', /** @lends Jii.httpS
     redirect(url, statusCode) {
         statusCode = statusCode || 302;
 
-        url = Jii.helpers.Url.to(url, this.owner, true);
+        url = Url.to(url, this.owner, true);
 
         // @todo
         /*if (Yii::$app->getRequest()->getIsPjax()) {
@@ -461,12 +465,12 @@ module.exports = Jii.defineClass('Jii.httpServer.Response', /** @lends Jii.httpS
                     break;
 
                 default:
-                    throw new Jii.exceptions.InvalidConfigException("Unsupported response format: " + this.format);
+                    throw new InvalidConfigException("Unsupported response format: " + this.format);
             }
         }
 
         if (!_isString(this.content)) {
-            throw new Jii.exceptions.InvalidParamException("Response content must be a string.");
+            throw new InvalidParamException("Response content must be a string.");
         }
 
         if (_isObject(this.content)) {
