@@ -1,24 +1,22 @@
 'use strict';
 
-/**
- * @namespace Jii
- * @ignore
- */
-var Jii = require('../../index');
-var Response = require('../../server/Response');
-require('./bootstrap');
-
+var Jii = require('jii');
+var Response = require('jii-httpserver/server/Response');
+var HttpServer = require('jii-httpserver/server/HttpServer');
+var UnitTest = require('jii/server/base/UnitTest');
+var UrlManager = require('jii-urlmanager/UrlManager');
 var request = require('request');
+var SiteController = require('../controllers/SiteController');
 
-var app = Jii.namespace('app');
+require('../bootstrap');
 
 /**
  * @class tests.unit.HttpServerTest
  * @extends Jii.base.UnitTest
  */
-var self = Jii.defineClass('tests.unit.HttpServerTest', {
+var HttpServerTest = Jii.defineClass('tests.unit.HttpServerTest', {
 
-	__extends: 'Jii.base.UnitTest',
+	__extends: UnitTest,
 
 	__static: {
 		SERVER_PORT: 3300
@@ -27,14 +25,14 @@ var self = Jii.defineClass('tests.unit.HttpServerTest', {
 	init: function() {
 		Jii.app.setComponents({
 			urlManager: {
-				className: 'Jii.urlManager.UrlManager',
+				className: UrlManager,
 				rules: {
 					'': 'site/index',
 					'test/<page>': 'site/test'
 				}
 			},
 			httpServer: {
-				className: 'Jii.httpServer.HttpServer',
+				className: HttpServer,
 				port: this.__static.SERVER_PORT
 			}
 		});
@@ -62,7 +60,7 @@ var self = Jii.defineClass('tests.unit.HttpServerTest', {
 
 	requestTest: function (test) {
 		var testValue = new Date().getTime();
-		app.controllers.SiteController.prototype.actionTest = function(context) {
+		SiteController.prototype.actionTest = function(context) {
 			var request = context.getComponent('request');
 			var response = context.getComponent('response');
 
@@ -102,18 +100,4 @@ var self = Jii.defineClass('tests.unit.HttpServerTest', {
 
 });
 
-Jii.defineClass('app.controllers.SiteController', {
-
-	__extends: 'Jii.base.Controller',
-
-	actionIndex: function(context) {
-		var request = context.getComponent('request');
-		var response = context.getComponent('response');
-
-		response.data = 'test' + request.get('testParam');
-		response.send();
-	}
-
-});
-
-module.exports = new self().exports();
+module.exports = new HttpServerTest().exports();
