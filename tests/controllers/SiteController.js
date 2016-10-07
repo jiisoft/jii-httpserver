@@ -3,7 +3,7 @@
 var Jii = require('jii');
 var Controller = require('jii/base/Controller');
 
-module.exports = Jii.defineClass('app.controllers.SiteController', {
+var SiteController = Jii.defineClass('app.controllers.SiteController', {
 
     __extends: Controller,
 
@@ -16,3 +16,5 @@ module.exports = Jii.defineClass('app.controllers.SiteController', {
     }
 
 });
+
+module.exports = SiteController;

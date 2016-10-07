@@ -17,7 +17,7 @@ var HttpRequest = require('jii/base/HttpRequest');
  * @class Jii.httpServer.Request
  * @extends Jii.base.HttpRequest
  */
-module.exports = Jii.defineClass('Jii.httpServer.Request', /** @lends Jii.httpServer.Request.prototype */{
+var Request = Jii.defineClass('Jii.httpServer.Request', /** @lends Jii.httpServer.Request.prototype */{
 
 	__extends: HttpRequest,
 
@@ -336,3 +336,5 @@ module.exports = Jii.defineClass('Jii.httpServer.Request', /** @lends Jii.httpSe
     }
 
 });
+
+module.exports = Request;

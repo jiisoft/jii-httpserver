@@ -22,7 +22,7 @@ var multer = require('multer');
  * @class Jii.httpServer.HttpServer
  * @extends Jii.base.Component
  */
-module.exports = Jii.defineClass('Jii.httpServer.HttpServer', /** @lends Jii.httpServer.HttpServer.prototype */{
+var HttpServer = Jii.defineClass('Jii.httpServer.HttpServer', /** @lends Jii.httpServer.HttpServer.prototype */{
 	
 	__extends: Component,
 
@@ -104,7 +104,7 @@ module.exports = Jii.defineClass('Jii.httpServer.HttpServer', /** @lends Jii.htt
 			var response = new Response(expressResponse);
 
 			// Create context
-			var context = Jii.createContext();
+			var context = Jii.createContext({route: route});
 			context.setComponent('request', request);
 			context.setComponent('response', response);
 
@@ -116,3 +116,5 @@ module.exports = Jii.defineClass('Jii.httpServer.HttpServer', /** @lends Jii.htt
         Jii.info('Page not found.');
     }
 });
+
+module.exports = HttpServer;

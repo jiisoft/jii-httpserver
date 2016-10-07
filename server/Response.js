@@ -19,7 +19,7 @@ var Response = require('jii/base/Response');
  * @class Jii.httpServer.Response
  * @extends Jii.base.Response
  */
-module.exports = Jii.defineClass('Jii.httpServer.Response', /** @lends Jii.httpServer.Response.prototype */{
+var Response = Jii.defineClass('Jii.httpServer.Response', /** @lends Jii.httpServer.Response.prototype */{
 
 	__extends: Response,
 
@@ -478,5 +478,6 @@ module.exports = Jii.defineClass('Jii.httpServer.Response', /** @lends Jii.httpS
         }
     }
 
-
 });
+
+module.exports = Response;
