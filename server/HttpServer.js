@@ -30,7 +30,7 @@ var HttpServer = Jii.defineClass('Jii.httpServer.HttpServer', /** @lends Jii.htt
     port: 3000,
 
     /**
-     * @type {Jii.urlManager.UrlManager|string}
+     * @type {Jii.request.UrlManager|string}
      */
     urlManager: 'urlManager',
 

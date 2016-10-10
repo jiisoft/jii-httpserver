@@ -4,7 +4,7 @@ var Jii = require('jii');
 var Response = require('jii-httpserver/server/Response');
 var HttpServer = require('jii-httpserver/server/HttpServer');
 var UnitTest = require('jii/base/UnitTest');
-var UrlManager = require('jii-urlmanager/UrlManager');
+var UrlManager = require('jii/request/UrlManager');
 var request = require('request');
 var SiteController = require('../controllers/SiteController');
 

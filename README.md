@@ -4,5 +4,5 @@ jii-request-httpserver
 ### Install
 
 ```sh
-npm install jii jii-urlmanager jii-httpserver
+npm install jii jii-httpserver
 ```
