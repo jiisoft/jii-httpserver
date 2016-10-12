@@ -1,8 +1,8 @@
 'use strict';
 
 var Jii = require('jii');
-var Response = require('jii-httpserver/server/Response');
-var HttpServer = require('jii-httpserver/server/HttpServer');
+var Response = require('../../server/Response');
+var HttpServer = require('../../server/HttpServer');
 var UnitTest = require('jii/base/UnitTest');
 var UrlManager = require('jii/request/UrlManager');
 var request = require('request');
